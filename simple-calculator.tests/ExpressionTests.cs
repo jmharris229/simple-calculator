@@ -31,7 +31,13 @@ namespace simple_calculator.tests
         public void EnsureCapturingTermsInExpression()
         {
             Expression math_add = new Expression();
-            string exp = math_add.collectTerms();
+            string[] exp = math_add.collectTerms();
+
+            //tests to see that the terms are all saved
+            CollectionAssert.AreEqual(new string[] { "1", "2", "+" }, exp);
+
+            //tests to see that the operator was saved
+            Assert.AreEqual("+", exp[2]);
 
         }
 

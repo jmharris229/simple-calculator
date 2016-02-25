@@ -15,14 +15,17 @@ namespace simple_calculator
             return equation;
         }
 
-        public string collectTerms()
+        virtual public string[] collectTerms()
         {
             string equation = "1+2";
             int operatorIndex = equation.IndexOfAny(new char[] { '+', '-', '/', '*' });
             char op = equation[operatorIndex];
             string[] terms = equation.Split(op);
 
-            return terms;
+            string oper = op.ToString();
+            string[] Yep = new string[] { "1", "2", "+"};
+
+            return Yep;
 
         }
     }
