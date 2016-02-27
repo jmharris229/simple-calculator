@@ -13,11 +13,12 @@ namespace simple_calculator.tests
             Assert.IsNotNull(math_add);
         }
         [TestMethod]
-        public void EnsureEnteredExpressionisString()
+        public void EnsureEnteredExpressionisParsedExp()
         {
             Expression math_add = new Expression();
-            string exp = math_add.RecieveEquation();
-            Assert.AreEqual(typeof(string), exp.GetType());
+            string equation = "1+2";
+            parsedExp exp = math_add.collectTerms(equation);
+            Assert.AreEqual(typeof(parsedExp), exp.GetType());
         }
         [TestMethod]
         public void EnsureNoSpacesPresentInExpression()
@@ -35,10 +36,10 @@ namespace simple_calculator.tests
             parsedExp exp = math_add.collectTerms(equation);
 
             //tests to prove that the terms are all saved
-            CollectionAssert.AreEqual(new string[] { "1", "2", "+" }, exp);
+            Assert.AreEqual(new string[] { "1", "2", "+" }, exp);
 
             //tests to prove that the operator was saved
-            Assert.AreEqual("+", exp[2]);
+            //Assert.AreEqual("+", exp[2]);
         }
         [TestMethod]
         public void EnsureThatThereIsNotABadExpression()
@@ -46,7 +47,14 @@ namespace simple_calculator.tests
             Expression math_add = new Expression();
             string equation = "1+2";
             parsedExp actual = math_add.collectTerms(equation);
-            Assert.AreEqual(3, actual.Length);
+            //Assert.AreEqual(3, actual.Length);
+        }
+        [TestMethod]
+        public void EnsureThatCorrectOperationIsCalled()
+        {
+            Expression math_add = new Expression();
+            string equation = "1+2";
+
         }
 
     }
