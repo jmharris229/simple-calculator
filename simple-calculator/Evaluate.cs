@@ -34,6 +34,10 @@ namespace simple_calculator
             {
                  return opers.modulo(parsedExp.term1, parsedExp.term2);
             }
+            else
+            {
+                return 999999999;
+            }
         }
 
     }

@@ -31,7 +31,8 @@ namespace simple_calculator.tests
         public void EnsureCapturingTermsInExpression()
         {
             Expression math_add = new Expression();
-            string[] exp = math_add.collectTerms();
+            string equation = "1+2";
+            parsedExp exp = math_add.collectTerms(equation);
 
             //tests to prove that the terms are all saved
             CollectionAssert.AreEqual(new string[] { "1", "2", "+" }, exp);
@@ -43,7 +44,8 @@ namespace simple_calculator.tests
         public void EnsureThatThereIsNotABadExpression()
         {
             Expression math_add = new Expression();
-            string[] actual = math_add.collectTerms();
+            string equation = "1+2";
+            parsedExp actual = math_add.collectTerms(equation);
             Assert.AreEqual(3, actual.Length);
         }
 

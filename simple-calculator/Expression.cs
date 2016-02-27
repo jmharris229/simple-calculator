@@ -22,9 +22,8 @@ namespace simple_calculator
             int operatorIndex = equation.IndexOfAny(new char[] { '+', '-', '/', '*' });
             char op = equation[operatorIndex];
             parsedExp dog = new parsedExp();
-            dog.oper = op;
-           
             string[] terms = equation.Split(op);
+            dog.oper = op;
             dog.term1 = int.Parse(terms[0]);
             dog.term2 = int.Parse(terms[1]);
             return dog;
