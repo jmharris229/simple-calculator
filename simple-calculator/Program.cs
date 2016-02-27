@@ -10,6 +10,11 @@ namespace simple_calculator
     {
         static void Main(string[] args)
         {
+           Console.WriteLine("What would you like to evaluate?");
+           string expression = Console.ReadLine();
+            Evaluate runExp = new Evaluate();
+            int result = runExp.calculate(expression);
+            Console.WriteLine(result.ToString());
         }
     }
 }

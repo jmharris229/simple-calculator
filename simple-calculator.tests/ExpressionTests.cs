@@ -33,12 +33,18 @@ namespace simple_calculator.tests
             Expression math_add = new Expression();
             string[] exp = math_add.collectTerms();
 
-            //tests to see that the terms are all saved
+            //tests to prove that the terms are all saved
             CollectionAssert.AreEqual(new string[] { "1", "2", "+" }, exp);
 
-            //tests to see that the operator was saved
+            //tests to prove that the operator was saved
             Assert.AreEqual("+", exp[2]);
-
+        }
+        [TestMethod]
+        public void EnsureThatThereIsNotABadExpression()
+        {
+            Expression math_add = new Expression();
+            string[] actual = math_add.collectTerms();
+            Assert.AreEqual(3, actual.Length);
         }
 
     }

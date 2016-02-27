@@ -15,18 +15,19 @@ namespace simple_calculator
             return equation;
         }
 
-        virtual public string[] collectTerms()
+        virtual public parsedExp collectTerms(string equate)
         {
-            string equation = "1+2";
+            string equation = equate;
+            equation = equation.Replace(" ", "");
             int operatorIndex = equation.IndexOfAny(new char[] { '+', '-', '/', '*' });
             char op = equation[operatorIndex];
+            parsedExp dog = new parsedExp();
+            dog.oper = op;
+           
             string[] terms = equation.Split(op);
-
-            string oper = op.ToString();
-            string[] Yep = new string[] { "1", "2", "+"};
-
-            return Yep;
-
+            dog.term1 = int.Parse(terms[0]);
+            dog.term2 = int.Parse(terms[1]);
+            return dog;
         }
     }
 }
