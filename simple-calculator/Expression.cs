@@ -15,14 +15,31 @@ namespace simple_calculator
             return equation;
         }
 
-        virtual public parsedExp collectTerms(string equate)
+        virtual public ParsedExp collectTerms()
         {
-            string equation = equate;
-            equation = equation.Replace(" ", "");
-            int operatorIndex = equation.IndexOfAny(new char[] { '+', '-', '/', '*' });
-            char op = equation[operatorIndex];
-            parsedExp dog = new parsedExp();
-            string[] terms = equation.Split(op);
+            Console.WriteLine("Write expression");
+            string input = Console.ReadLine();          
+            input = input.Replace(" ", "");
+            int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' });
+
+            
+            if(operatorIndex == -1)
+            {
+                throw new NoOperatorException("Need an operator!");
+            }
+
+
+            char op = input[operatorIndex];
+            string[] terms = input.Split(op);
+
+            if(terms.Length != 2)
+            {
+                throw new InvalidTermException("Not right terms.");
+            }
+
+
+
+            ParsedExp dog = new ParsedExp();
             dog.oper = op;
             dog.term1 = int.Parse(terms[0]);
             dog.term2 = int.Parse(terms[1]);

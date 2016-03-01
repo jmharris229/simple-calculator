@@ -13,12 +13,11 @@ namespace simple_calculator.tests
             Assert.IsNotNull(math_add);
         }
         [TestMethod]
-        public void EnsureEnteredExpressionisParsedExp()
+        public void EnsureReturnedValueisParsedExp()
         {
             Expression math_add = new Expression();
-            string equation = "1+2";
-            parsedExp exp = math_add.collectTerms(equation);
-            Assert.AreEqual(typeof(parsedExp), exp.GetType());
+            ParsedExp exp = math_add.collectTerms();
+            Assert.AreEqual(typeof(ParsedExp), exp.GetType());
         }
         [TestMethod]
         public void EnsureNoSpacesPresentInExpression()
@@ -32,30 +31,20 @@ namespace simple_calculator.tests
         public void EnsureCapturingTermsInExpression()
         {
             Expression math_add = new Expression();
-            string equation = "1+2";
-            parsedExp exp = math_add.collectTerms(equation);
-
-            //tests to prove that the terms are all saved
-            Assert.AreEqual(new string[] { "1", "2", "+" }, exp);
-
-            //tests to prove that the operator was saved
-            //Assert.AreEqual("+", exp[2]);
+            ParsedExp exp = math_add.collectTerms();
+            //tests to prove that the operator and terms were saved as numbers
+            Assert.AreEqual(1,exp.term1);
+            //Assert.AreEqual(2,exp.term2);
+            //prove that the operator was saved and ensures that the correct operation was called
+            //Assert.AreEqual('+',exp.oper);
         }
         [TestMethod]
         public void EnsureThatThereIsNotABadExpression()
         {
             Expression math_add = new Expression();
             string equation = "1+2";
-            parsedExp actual = math_add.collectTerms(equation);
+            //ParsedExp actual = math_add.collectTerms(equation);
             //Assert.AreEqual(3, actual.Length);
         }
-        [TestMethod]
-        public void EnsureThatCorrectOperationIsCalled()
-        {
-            Expression math_add = new Expression();
-            string equation = "1+2";
-
-        }
-
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace simple_calculator
 {
-    public class parsedExp
+    public class ParsedExp
     {
         public int term1 { get; set; }
         public int term2 { get; set; }

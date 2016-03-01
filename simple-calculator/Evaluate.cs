@@ -11,32 +11,36 @@ namespace simple_calculator
 
         private Expression collection = new Expression();
         Operators opers = new Operators();
-        public int calculate(string express)
+        public int calculate()
         {
-           parsedExp parsedExp = collection.collectTerms(express);
-           if(parsedExp.oper == '+')
+            try
             {
-                return opers.add(parsedExp.term1, parsedExp.term2);
+                ParsedExp parsedExp = collection.collectTerms();
+                if (parsedExp.oper == '+')
+                {
+                    return opers.add(parsedExp.term1, parsedExp.term2);
+                }
+                else if (parsedExp.oper == '-')
+                {
+                    return opers.subtract(parsedExp.term1, parsedExp.term2);
+                }
+                else if (parsedExp.oper == '*')
+                {
+                    return opers.multiply(parsedExp.term1, parsedExp.term2);
+                }
+                else if (parsedExp.oper == '/')
+                {
+                    return opers.divide(parsedExp.term1, parsedExp.term2);
+                }
+                else
+                {
+                    return opers.modulo(parsedExp.term1, parsedExp.term2);
+                }
             }
-           else if(parsedExp.oper == '-')
+            catch (Exception ex)
             {
-                 return opers.subtract(parsedExp.term1, parsedExp.term2);
-            }
-            else if (parsedExp.oper == '*')
-            {
-                 return opers.multiply(parsedExp.term1, parsedExp.term2);
-            }
-            else if (parsedExp.oper == '/')
-            {
-                return opers.divide(parsedExp.term1, parsedExp.term2);
-            }
-            else if (parsedExp.oper == '%')
-            {
-                 return opers.modulo(parsedExp.term1, parsedExp.term2);
-            }
-            else
-            {
-                return 999999999;
+                Console.WriteLine(ex.Message);
+               return  this.calculate();
             }
         }
 
