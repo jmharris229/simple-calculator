@@ -7,17 +7,10 @@ namespace simple_calculator.tests
     public class ExpressionTests
     {
         [TestMethod]
-        public void EnsureICanCallNewClass()
+        public void EnsureICanCallNewExpressionClass()
         {
             Expression math_add = new Expression();
             Assert.IsNotNull(math_add);
-        }
-        [TestMethod]
-        public void EnsureReturnedValueisParsedExp()
-        {
-            Expression math_add = new Expression();
-            ParsedExp exp = math_add.collectTerms();
-            Assert.AreEqual(typeof(ParsedExp), exp.GetType());
         }
         [TestMethod]
         public void EnsureNoSpacesPresentInExpression()
@@ -32,14 +25,18 @@ namespace simple_calculator.tests
         {
             Expression math_add = new Expression();
             ParsedExp exp = math_add.collectTerms();
+
             //tests to prove that the operator and terms were saved as numbers
-            Assert.AreEqual(1,exp.term1);
-            //Assert.AreEqual(2,exp.term2);
+            Assert.AreEqual(typeof(int),exp.term1.GetType());
+            Assert.AreEqual(typeof(int),exp.term2.GetType());
+
+           string op =  exp.oper.ToString();
+           int opPresent =  op.IndexOfAny(new char[] { '+', '-', '/', '*', '%' });
             //prove that the operator was saved and ensures that the correct operation was called
-            //Assert.AreEqual('+',exp.oper);
+           Assert.AreEqual(0, opPresent);
         }
         [TestMethod]
-        public void EnsureThatThereIsNotABadExpression()
+        public void EnsureCanHandleABadExpression()
         {
             Expression math_add = new Expression();
             string equation = "1+2";

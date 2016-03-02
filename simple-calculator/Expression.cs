@@ -18,7 +18,7 @@ namespace simple_calculator
         virtual public ParsedExp collectTerms()
         {
             Console.WriteLine("Write expression");
-            string input = Console.ReadLine();          
+            string input = "1+2";          
             input = input.Replace(" ", "");
             int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' });
 
@@ -36,8 +36,6 @@ namespace simple_calculator
             {
                 throw new InvalidTermException("Not right terms.");
             }
-
-
 
             ParsedExp dog = new ParsedExp();
             dog.oper = op;
