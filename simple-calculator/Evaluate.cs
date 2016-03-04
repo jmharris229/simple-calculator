@@ -11,11 +11,28 @@ namespace simple_calculator
 
         private Expression collection = new Expression();
         Operators opers = new Operators();
+        private Stack Prevterms = new Stack();
         public int calculate(string exp)
         {
             try
             {
-                ParsedExp parsedExp = collection.collectTerms(exp);
+                //determines what command the user is calling
+                ParsedExp parsedExp = new ParsedExp();
+                if (exp.Equals("last"))
+                {
+                    parsedExp = collection.collectTerms(Prevterms.last.ToString());
+                }
+                else if (exp.Equals("lastq"))
+                {
+                    parsedExp = collection.collectTerms(Prevterms.lastq);
+                }
+                else
+                {
+                    parsedExp = collection.collectTerms(exp);
+                }
+                //ParsedExp parsedExp = collection.collectTerms(exp);
+
+                //evaluates expression
                 if (parsedExp.oper == '+')
                 {
                     return opers.add(parsedExp.term1, parsedExp.term2);

@@ -14,11 +14,23 @@ namespace simple_calculator
             equation = equation.Replace(" ", "");
             return equation;
         }
-
+        
         virtual public ParsedExp collectTerms(string exp)
         {
+            Stack Prevterms = new Stack();
             Console.WriteLine("Write expression");
-            string input = exp;          
+            if (exp.Equals("last")){
+                string input = Prevterms.last.ToString();
+            }
+            else if (exp.Equals("lastq"))
+            {
+                string input = Prevterms.lastq;
+            }
+            else
+            {
+                string input = exp;
+            }
+                      
             input = input.Replace(" ", "");
             int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' });
 
