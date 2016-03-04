@@ -15,24 +15,22 @@ namespace simple_calculator
             return equation;
         }
 
-        virtual public ParsedExp collectTerms()
+        virtual public ParsedExp collectTerms(string exp)
         {
             Console.WriteLine("Write expression");
-            string input = "1+2";          
+            string input = exp;          
             input = input.Replace(" ", "");
             int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' });
 
-            
             if(operatorIndex == -1)
             {
                 throw new NoOperatorException("Need an operator!");
             }
 
-
             char op = input[operatorIndex];
             string[] terms = input.Split(op);
-
-            if(terms.Length != 2)
+           
+            if(terms.Length != 2 || terms[1].Equals("") || terms[0].Equals(""))
             {
                 throw new InvalidTermException("Not right terms.");
             }

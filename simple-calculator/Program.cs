@@ -13,15 +13,16 @@ namespace simple_calculator
             Evaluate runExp = new Evaluate();        
             try
             {
-               int result = runExp.calculate();
+                int result = runExp.calculate("2+4");
                 Console.WriteLine(result);
+                runExp.calculate("2+4");
+                Console.ReadKey();
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine("{0} Exception caught.", ex);
             }
-            Console.ReadLine();
         }
     }
 }

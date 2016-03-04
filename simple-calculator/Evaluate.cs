@@ -11,11 +11,11 @@ namespace simple_calculator
 
         private Expression collection = new Expression();
         Operators opers = new Operators();
-        public int calculate()
+        public int calculate(string exp)
         {
             try
             {
-                ParsedExp parsedExp = collection.collectTerms();
+                ParsedExp parsedExp = collection.collectTerms(exp);
                 if (parsedExp.oper == '+')
                 {
                     return opers.add(parsedExp.term1, parsedExp.term2);
@@ -39,8 +39,8 @@ namespace simple_calculator
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-               return  this.calculate();
+               Console.WriteLine(ex.Message);
+               return  this.calculate(exp);
             }
         }
 
