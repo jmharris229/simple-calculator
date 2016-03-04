@@ -19,18 +19,7 @@ namespace simple_calculator
         {
             Stack Prevterms = new Stack();
             Console.WriteLine("Write expression");
-            if (exp.Equals("last")){
-                string input = Prevterms.last.ToString();
-            }
-            else if (exp.Equals("lastq"))
-            {
-                string input = Prevterms.lastq;
-            }
-            else
-            {
-                string input = exp;
-            }
-                      
+            string input = exp;          
             input = input.Replace(" ", "");
             int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' });
 
