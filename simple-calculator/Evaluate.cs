@@ -8,13 +8,15 @@ namespace simple_calculator
 {
     public class Evaluate
     {
-
-        private Expression collection = new Expression();
-        Operators opers = new Operators();
+        public Evaluate()
+        {
+            collection = new Expression();
+            opers = new Operators();     
+        }
+        private Expression collection;
+        Operators opers;
         public int calculate(string exp)
         {
-            try
-            {
                 ParsedExp parsedExp = collection.collectTerms(exp);
                 if (parsedExp.oper == '+')
                 {
@@ -37,12 +39,6 @@ namespace simple_calculator
                     return opers.modulo(parsedExp.term1, parsedExp.term2);
                 }
             }
-            catch (Exception ex)
-            {
-               Console.WriteLine(ex.Message);
-               return  this.calculate(exp);
-            }
         }
 
     }
-}
