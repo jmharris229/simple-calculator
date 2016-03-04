@@ -52,6 +52,26 @@ namespace simple_calculator.tests
             //prove that the operator was saved and ensures that the correct operation was called
             Assert.AreNotEqual(-1, opPresent);
         }
-
+        [TestMethod]
+        public void EnsureEvaluatHandleCorrectExpression()
+        {
+            Evaluate mathey = new Evaluate();
+            int result = mathey.calculate("1+2");
+            Assert.AreEqual(3, result);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidTermException))]
+        public void EnsureEvaluateHandleBadTermsExpression()
+        {
+            Evaluate mathey = new Evaluate();
+            mathey.calculate("1+");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(NoOperatorException))]
+        public void EnsureEvaluateHandleNoOperatorExpression()
+        {
+            Evaluate mathey = new Evaluate();
+            mathey.calculate("1");
+        }
     }
 }
