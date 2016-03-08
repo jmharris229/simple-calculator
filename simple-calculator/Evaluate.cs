@@ -32,29 +32,41 @@ namespace simple_calculator
             }
             else
             {
+                Prevterms.lastq = exp;
                 parsedExp = collection.collectTerms(exp);
+                
             }
 
             //runs the operator function passed
             if (parsedExp.oper == '+')
             {
-                return opers.add(parsedExp.term1, parsedExp.term2);
+                int result = opers.add(parsedExp.term1, parsedExp.term2);
+                Prevterms.last = result;
+                return result;
             }
             else if (parsedExp.oper == '-')
             {
-                return opers.subtract(parsedExp.term1, parsedExp.term2);
+                int result = opers.subtract(parsedExp.term1, parsedExp.term2);
+                Prevterms.last = result;
+                return result;
             }
             else if (parsedExp.oper == '*')
             {
-                return opers.multiply(parsedExp.term1, parsedExp.term2);
+                int result = opers.multiply(parsedExp.term1, parsedExp.term2);
+                Prevterms.last = result;
+                return result;
             }
             else if (parsedExp.oper == '/')
             {
-                return opers.divide(parsedExp.term1, parsedExp.term2);
+                int result = opers.divide(parsedExp.term1, parsedExp.term2);
+                Prevterms.last = result;
+                return result;
             }
             else
             {
-                return opers.modulo(parsedExp.term1, parsedExp.term2);
+                int result = opers.modulo(parsedExp.term1, parsedExp.term2);
+                Prevterms.last = result;
+                return result;
             }
          }
       }

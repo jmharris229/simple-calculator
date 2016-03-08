@@ -15,8 +15,7 @@ namespace simple_calculator
             return equation;
         }
         public ParsedExp collectTerms(string exp)
-        {
-            Stack Prevterms = new Stack();
+        {    
             Console.WriteLine("Write expression");
             string input = exp;          
             input = input.Replace(" ", "");
