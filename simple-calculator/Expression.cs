@@ -29,7 +29,7 @@ namespace simple_calculator
                 ForP = '-';
                 
                 //input is now a string without the negative at the beginning.
-                input = input.Substring(1, input.Length);
+                input = input.Substring(1, input.Length-1);
             }
 
             //find the index of the operator
@@ -50,20 +50,11 @@ namespace simple_calculator
                 }
             }
 
+            //saves the value of the operator index
             char op = input[operatorIndex];
-            string[] terms = input.Split(new char[] { op }, 2);
-            /*//saves the index of the operator
-            
 
             //will attempt to split the input into two strings based on new input which starts without the negative at the beginning if there was one. and should split on the first instance of the operator.
-            
-            
-            //checks to see if the length of terms is 2, or if either position is an empty string. This makes sure we have the right amount of terms.
-            if(terms.Length != 2 || terms[1].Equals("") || terms[0].Equals(""))
-            {
-                throw new InvalidTermException("Not right amount of terms.");
-            }*/
-
+            string[] terms = input.Split(new char[] { op }, 2);
 
             ParsedExp expression = new ParsedExp();
             if (ForP == '-')
@@ -78,10 +69,6 @@ namespace simple_calculator
                 expression.term1 = int.Parse(terms[0]);
                 expression.term2 = int.Parse(terms[1]);
             }
-            
-            
-            /*expression.term1 = int.Parse(input.Substring(0,operatorIndex-1));
-            expression.term2 = int.Parse(input.Substring(operatorIndex+1,input.Length-1));*/
             return expression;
         }
     }

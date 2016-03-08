@@ -65,6 +65,8 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             mathey.calculate("1+");
+            mathey.calculate("%1");
+            mathey.calculate("-1");
         }
         [TestMethod]
         [ExpectedException(typeof(NoOperatorException))]
@@ -72,6 +74,22 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             mathey.calculate("1");
+        }
+        [TestMethod]
+        public void EnsureCollectTermsHandleNegativeInFirstTerm()
+        {
+            Evaluate mathey = new Evaluate();
+            int act_result = mathey.calculate("-1+2");
+            int exp_result = 1;
+            Assert.AreEqual(exp_result, act_result);
+        }
+        [TestMethod]
+        public void EnsureCollectTermsHandleNegativeSecondTerm()
+        {
+            Evaluate mathey = new Evaluate();
+            int act_result = mathey.calculate("1+-2");
+            int exp_result = -1;
+            Assert.AreEqual(exp_result, act_result);
         }
     }
 }
