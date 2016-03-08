@@ -8,20 +8,19 @@ namespace simple_calculator
 {
    public class Expression
     {
-        virtual public string RecieveEquation()
+        public string RecieveEquation()
         {
             string equation = "1 + 2";
             equation = equation.Replace(" ", "");
             return equation;
         }
-        
-        virtual public ParsedExp collectTerms(string exp)
+        public ParsedExp collectTerms(string exp)
         {
             Stack Prevterms = new Stack();
             Console.WriteLine("Write expression");
             string input = exp;          
             input = input.Replace(" ", "");
-            int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' });
+            int operatorIndex = input.IndexOfAny(new char[] { '+', '-', '/', '*' },1);
 
             if(operatorIndex == -1)
             {
@@ -29,18 +28,21 @@ namespace simple_calculator
             }
 
             char op = input[operatorIndex];
-            string[] terms = input.Split(op);
+
+            //check to to see if the 0 index is a negative. if so makes substring of 
+
+            string[] terms = input.Split(new char[] { op }, 2);
            
             if(terms.Length != 2 || terms[1].Equals("") || terms[0].Equals(""))
             {
                 throw new InvalidTermException("Not right terms.");
             }
 
-            ParsedExp dog = new ParsedExp();
-            dog.oper = op;
-            dog.term1 = int.Parse(terms[0]);
-            dog.term2 = int.Parse(terms[1]);
-            return dog;
+            ParsedExp expression = new ParsedExp();
+            expression.oper = op;
+            expression.term1 = int.Parse(input.Substring(0,operatorIndex-1));
+            expression.term2 = int.Parse(input.Substring(operatorIndex+1,input.Length-1));
+            return expression;
         }
     }
 }

@@ -8,58 +8,54 @@ namespace simple_calculator
 {
     public class Evaluate
     {
-
-        private Expression collection = new Expression();
-        Operators opers = new Operators();
-        private Stack Prevterms = new Stack();
+        public Evaluate()
+        {
+            collection = new Expression();
+            opers = new Operators();
+            Prevterms = new Stack();   
+        }
+        private Expression collection;
+        private Operators opers;
+        private Stack Prevterms;
         public int calculate(string exp)
         {
-            try
-            {
-                //determines what command the user is calling
-                ParsedExp parsedExp = new ParsedExp();
-                if (exp.Equals("last"))
-                {
-                    parsedExp = collection.collectTerms(Prevterms.last.ToString());
-                }
-                else if (exp.Equals("lastq"))
-                {
-                    parsedExp = collection.collectTerms(Prevterms.lastq);
-                }
-                else
-                {
-                    parsedExp = collection.collectTerms(exp);
-                }
-                //ParsedExp parsedExp = collection.collectTerms(exp);
+            ParsedExp parsedExp = collection.collectTerms(exp);
 
-                //evaluates expression
-                if (parsedExp.oper == '+')
-                {
-                    return opers.add(parsedExp.term1, parsedExp.term2);
-                }
-                else if (parsedExp.oper == '-')
-                {
-                    return opers.subtract(parsedExp.term1, parsedExp.term2);
-                }
-                else if (parsedExp.oper == '*')
-                {
-                    return opers.multiply(parsedExp.term1, parsedExp.term2);
-                }
-                else if (parsedExp.oper == '/')
-                {
-                    return opers.divide(parsedExp.term1, parsedExp.term2);
-                }
-                else
-                {
-                    return opers.modulo(parsedExp.term1, parsedExp.term2);
-                }
-            }
-            catch (Exception ex)
+            //determines the command to run based on the input
+            if (exp.Equals("last"))
             {
-               Console.WriteLine(ex.Message);
-               return  this.calculate(exp);
+                parsedExp = collection.collectTerms(Prevterms.last.ToString());
             }
-        }
+            else if (exp.Equals("lastq"))
+            {
+                parsedExp = collection.collectTerms(Prevterms.lastq);
+            }
+            else
+            {
+                parsedExp = collection.collectTerms(exp);
+            }
 
-    }
+            //runs the operator function passed
+            if (parsedExp.oper == '+')
+            {
+                return opers.add(parsedExp.term1, parsedExp.term2);
+            }
+            else if (parsedExp.oper == '-')
+            {
+                return opers.subtract(parsedExp.term1, parsedExp.term2);
+            }
+            else if (parsedExp.oper == '*')
+            {
+                return opers.multiply(parsedExp.term1, parsedExp.term2);
+            }
+            else if (parsedExp.oper == '/')
+            {
+                return opers.divide(parsedExp.term1, parsedExp.term2);
+            }
+            else
+            {
+                return opers.modulo(parsedExp.term1, parsedExp.term2);
+            }
+         }
+      }
 }
