@@ -44,10 +44,17 @@ namespace simple_calculator
             char[] NoMinusOpArray = new char[] { '+', '/', '*', '%' };
             foreach (var item in NoMinusOpArray)
             {
-                if (input[0] == item || input[operatorIndex] + 1 == item || input[input.Length - 1] == item || input[input.Length - 1] == '-')
+                try
+                {
+                    if (input[0] == item || (operatorIndex + 1 < input.Length && input[operatorIndex + 1] == item) || input[input.Length - 1] == item || input[input.Length - 1] == '-')
+                    {
+                        throw new InvalidTermException("Invalid Term Placement.");
+                    }
+                }catch(IndexOutOfRangeException ex)
                 {
                     throw new InvalidTermException("Invalid Term Placement.");
                 }
+ 
             }
 
             //saves the value of the operator index

@@ -47,10 +47,9 @@ namespace simple_calculator.tests
         {
             Expression math_add = new Expression();
             ParsedExp exp = math_add.collectTerms("1+2");
-            string op = exp.oper.ToString();
-            int opPresent = op.IndexOfAny(new char[] { '+', '-', '/', '*', '%' });
+            int opPresent = '+';
             //prove that the operator was saved and ensures that the correct operation was called
-            Assert.AreNotEqual(-1, opPresent);
+            Assert.AreEqual(opPresent, exp.oper);
         }
         [TestMethod]
         public void EnsureEvaluatHandleCorrectExpression()
@@ -61,12 +60,25 @@ namespace simple_calculator.tests
         }
         [TestMethod]
         [ExpectedException(typeof(InvalidTermException))]
-        public void EnsureEvaluateHandleBadTermsExpression()
+        public void EnsureEvaluateHandleBadTermsExpressionEndOp()
         {
             Evaluate mathey = new Evaluate();
             mathey.calculate("1+");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(NoOperatorException))]
+        public void EnsureEvaluateHandleBadTermsExpressionBegOp()
+        {
+            Evaluate mathey = new Evaluate();
             mathey.calculate("%1");
-            mathey.calculate("-1");
+            
+        }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidTermException))]
+        public void EnsureEvaluateHandleBadTermsExpressionExtraOp()
+        {
+            Evaluate mathey = new Evaluate();
+            mathey.calculate("1+%2");
         }
         [TestMethod]
         [ExpectedException(typeof(NoOperatorException))]
