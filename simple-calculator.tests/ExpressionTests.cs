@@ -55,7 +55,7 @@ namespace simple_calculator.tests
         public void EnsureEvaluatHandleCorrectExpression()
         {
             Evaluate mathey = new Evaluate();
-            int result = mathey.calculate("1+2");
+            double result = mathey.calculate("1+2");
             Assert.AreEqual(3, result);
         }
         [TestMethod]
@@ -91,7 +91,7 @@ namespace simple_calculator.tests
         public void EnsureCollectTermsHandleNegativeInFirstTerm()
         {
             Evaluate mathey = new Evaluate();
-            int act_result = mathey.calculate("-1+2");
+            double act_result = mathey.calculate("-1+2");
             int exp_result = 1;
             Assert.AreEqual(exp_result, act_result);
         }
@@ -99,7 +99,7 @@ namespace simple_calculator.tests
         public void EnsureCollectTermsHandleNegativeSecondTerm()
         {
             Evaluate mathey = new Evaluate();
-            int act_result = mathey.calculate("1+-2");
+            double act_result = mathey.calculate("1+-2");
             int exp_result = -1;
             Assert.AreEqual(exp_result, act_result);
         }

@@ -17,14 +17,15 @@ namespace simple_calculator
         private Expression collection;
         private Operators opers;
         private Stack Prevterms;
-        public int calculate(string exp)
+
+        public double calculate(string exp)
         {
-            ParsedExp parsedExp = collection.collectTerms(exp);
+            ParsedExp parsedExp;
 
             //determines the command to run based on the input
             if (exp.Equals("last"))
             {
-                parsedExp = collection.collectTerms(Prevterms.last.ToString());
+                return Prevterms.last;
             }
             else if (exp.Equals("lastq"))
             {
@@ -33,14 +34,13 @@ namespace simple_calculator
             else
             {
                 Prevterms.lastq = exp;
-                parsedExp = collection.collectTerms(exp);
-                
+                parsedExp = collection.collectTerms(exp);              
             }
 
             //runs the operator function passed
             if (parsedExp.oper == '+')
             {
-                int result = opers.add(parsedExp.term1, parsedExp.term2);
+                int result = opers.add( parsedExp.term1, parsedExp.term2);
                 Prevterms.last = result;
                 return result;
             }
@@ -58,8 +58,8 @@ namespace simple_calculator
             }
             else if (parsedExp.oper == '/')
             {
-                int result = opers.divide(parsedExp.term1, parsedExp.term2);
-                Prevterms.last = result;
+                double result = opers.divide(parsedExp.term1, parsedExp.term2);
+                Prevterms.last = (int)result;
                 return result;
             }
             else

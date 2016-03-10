@@ -13,11 +13,11 @@ namespace simple_calculator
             Evaluate runExp = new Evaluate();        
             try
             {
-                int result = runExp.calculate("2+4");
+                double result = runExp.calculate("2+4");
                 Console.WriteLine(result);
-                runExp.calculate("2+4");
+                Console.WriteLine(runExp.calculate("lastq"));
+               // Console.WriteLine(runExp.calculate("lastq"));
                 Console.ReadKey();
-
             }
             catch (Exception ex)
             {
