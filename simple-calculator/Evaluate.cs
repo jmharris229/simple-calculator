@@ -34,7 +34,7 @@ namespace simple_calculator
             else if (exp.Contains("="))
             {
                 Prevterms.setDictionary(exp);
-                return 0.0d;
+                return 0.00;
             }
             else
             {

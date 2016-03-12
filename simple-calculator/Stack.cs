@@ -10,14 +10,63 @@ namespace simple_calculator
     {
         public string lastq { get; set; }
         public int last { get; set; }
-        new Dictionary<string, int> constants = new Dictionary<string, int>();
+        Dictionary<char, int> constants = new Dictionary<char, int>();
 
-        public string setDictionary(string exp)
+        public Stack()
+        {
+           runExp = new Evaluate();
+        }
+        private Evaluate runExp;
+
+
+        int exiter = 0;
+        int counter = 1;
+
+       public string command()
+       {
+            while(exiter == 0)
+            {
+                Console.WriteLine("[{x}]", counter);
+                string expression = Console.ReadLine();
+
+                if(expression == "exit" || expression == "quit")
+                {
+                    exiter = 1;                 
+                }
+                else
+                {
+                    double result = runExp.calculate(expression);
+                    counter++;
+                    return result.ToString();
+                }
+             }
+            return "Bye!";
+        }
+
+
+
+
+
+
+
+
+        public void setDictionary(string exp)
         {
             //create an if statement that checks to see if an instance of the dictionary key value pair is in constatns if it is throw an exception, if not add it
-
+            foreach (var item in constants)
+            {
+                if(exp[0] == item.Key)
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    
+                    int constantValue = Convert.ToInt32(exp.Substring(2,    exp.Length - 1));
+                    constants.Add(exp[0], constantValue);
+                }
+            }
             //convert letter to lower case for check and save
-            return "value";
         }
 
         public string constantsDictionary(string exp)
