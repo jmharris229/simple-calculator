@@ -14,6 +14,7 @@ namespace simple_calculator
 
         public void setDictionary(string exp)
         {
+            Console.WriteLine("got here");
             //create an if statement that checks to see if an instance of the dictionary key value pair is in constatns if it is throw an exception, if not add it
             foreach (var item in constants)
             {
@@ -23,9 +24,10 @@ namespace simple_calculator
                 }
                 else
                 {
-                    
+                    Console.WriteLine("got to else");
                     int constantValue = Convert.ToInt32(exp.Substring(2, exp.Length - 1));
                     constants.Add(exp[0], constantValue);
+                    Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
                 }
             }
             //convert letter to lower case for check and save

@@ -31,11 +31,6 @@ namespace simple_calculator
             {
                 parsedExp = collection.collectTerms(Prevterms.lastq);
             }
-            else if (exp.Contains("="))
-            {
-                Prevterms.setDictionary(exp);
-                return 0.00;
-            }
             else
             {
                 Prevterms.lastq = exp;

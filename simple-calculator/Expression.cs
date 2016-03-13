@@ -15,10 +15,11 @@ namespace simple_calculator
             return equation;
         }
         public ParsedExp collectTerms(string exp)
-        {    
-            Console.WriteLine("Write expression");
+        {
+            Stack dictionary = new Stack();
             string input = exp;          
             input = input.Replace(" ", "");
+
             char[] opArray = new char[] { '+', '-', '/', '*', '%' };
             char ForP = '+';
 

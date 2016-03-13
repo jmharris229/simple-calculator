@@ -11,7 +11,7 @@ namespace simple_calculator
         static void Main(string[] args)
         {
             Evaluate runExp = new Evaluate();
-
+            Stack dictionary = new Stack();
             int exiter = 0;
             int counter = 1;
             while (exiter == 0)
@@ -23,6 +23,11 @@ namespace simple_calculator
                 {
                     exiter = 1;
                     Console.WriteLine("Bye!");
+                }
+                else if (expression.Contains('='))
+                {
+                    dictionary.setDictionary(expression);
+                    counter++;
                 }
                 else
                 {
