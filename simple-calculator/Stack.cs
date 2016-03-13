@@ -12,44 +12,6 @@ namespace simple_calculator
         public int last { get; set; }
         Dictionary<char, int> constants = new Dictionary<char, int>();
 
-        public Stack()
-        {
-           runExp = new Evaluate();
-        }
-        private Evaluate runExp;
-
-
-        int exiter = 0;
-        int counter = 1;
-
-       public string command()
-       {
-            while(exiter == 0)
-            {
-                Console.WriteLine("[{x}]", counter);
-                string expression = Console.ReadLine();
-
-                if(expression == "exit" || expression == "quit")
-                {
-                    exiter = 1;                 
-                }
-                else
-                {
-                    double result = runExp.calculate(expression);
-                    counter++;
-                    return result.ToString();
-                }
-             }
-            return "Bye!";
-        }
-
-
-
-
-
-
-
-
         public void setDictionary(string exp)
         {
             //create an if statement that checks to see if an instance of the dictionary key value pair is in constatns if it is throw an exception, if not add it
@@ -62,7 +24,7 @@ namespace simple_calculator
                 else
                 {
                     
-                    int constantValue = Convert.ToInt32(exp.Substring(2,    exp.Length - 1));
+                    int constantValue = Convert.ToInt32(exp.Substring(2, exp.Length - 1));
                     constants.Add(exp[0], constantValue);
                 }
             }

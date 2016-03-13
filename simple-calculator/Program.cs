@@ -10,20 +10,38 @@ namespace simple_calculator
     {
         static void Main(string[] args)
         {
-            Stack runExp = new Stack();
+            Evaluate runExp = new Evaluate();
 
-            runExp.command();      
-           /* try
+            int exiter = 0;
+            int counter = 1;
+            while (exiter == 0)
             {
-                double result = runExp.calculate("2+4");
-                Console.WriteLine("= "+result);
-                Console.WriteLine(runExp.calculate("lastq"));
-                Console.ReadKey();
+                Console.WriteLine("[{0}]", counter);
+                string expression = Console.ReadLine();
+
+                if (expression == "exit" || expression == "quit")
+                {
+                    exiter = 1;
+                    Console.WriteLine("Bye!");
+                }
+                else
+                {
+                    double result = runExp.calculate(expression);
+                    counter++;
+                    Console.WriteLine("= {0}", result);
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("{0} Exception caught.", ex);
-            }*/
+            /* try
+             {
+                 double result = runExp.calculate("2+4");
+                 Console.WriteLine("= "+result);
+                 Console.WriteLine(runExp.calculate("lastq"));
+                 Console.ReadKey();
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine("{0} Exception caught.", ex);
+             }*/
         }
     }
 }
