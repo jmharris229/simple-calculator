@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace simple_calculator
@@ -63,18 +64,35 @@ namespace simple_calculator
             //will attempt to split the input into two strings based on new input which starts without the negative at the beginning if there was one. and should split on the first instance of the operator.
             string[] terms = input.Split(new char[] { op }, 2);
 
+
+
+            bool match1 = Regex.IsMatch(terms[0], @"^[a-zA-Z]+$");
+            bool match2 = Regex.IsMatch(terms[1], @"^[a-zA-Z]+$");
+            Stack Dictionary = new Stack();
+            string termValue1 = terms[0];
+            string termValue2 = terms[1];
+            if (match1)
+            {
+                termValue1 = Dictionary.constantsDictionary(terms[0]).ToString();
+            }
+
+            if (match2)
+            {
+                termValue2 = Dictionary.constantsDictionary(terms[1]).ToString();
+            }
+
             ParsedExp expression = new ParsedExp();
             if (ForP == '-')
             {
                 expression.oper = op;
-                expression.term1 = int.Parse(ForP + terms[0]);
-                expression.term2 = int.Parse(terms[1]);
+                expression.term1 = int.Parse(ForP + termValue1);
+                expression.term2 = int.Parse(termValue2);
             }
             else
             {
                 expression.oper = op;
-                expression.term1 = int.Parse(terms[0]);
-                expression.term2 = int.Parse(terms[1]);
+                expression.term1 = int.Parse(termValue1);
+                expression.term2 = int.Parse(termValue2);
             }
             return expression;
         }

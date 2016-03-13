@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace simple_calculator
@@ -14,6 +15,7 @@ namespace simple_calculator
             Stack dictionary = new Stack();
             int exiter = 0;
             int counter = 1;
+
             while (exiter == 0)
             {
                 Console.WriteLine("[{0}]", counter);

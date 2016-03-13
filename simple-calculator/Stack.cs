@@ -39,7 +39,6 @@ namespace simple_calculator
                     }
                     else
                     {
-                        Console.WriteLine("got to else");
                         constantValue = Convert.ToInt32(exp.Substring(2, exp.Length - 1));
                         constants.Add(exp[0], constantValue);
                         Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
@@ -51,12 +50,17 @@ namespace simple_calculator
             //convert letter to lower case for check and save
         }
 
-        public string constantsDictionary(string exp)
+        public int constantsDictionary(string exp)
         {
             //create an if statement that checks to see if the value is there, if it is return the value, else throw exception that constant not defined
-            return "value";
-            
+            if (constants.ContainsKey(exp[0]))
+            {
+                return constants[exp[0]];
+            }
+            else
+            {
+                throw new Exception();
+            }       
         }
-
     }
 }
