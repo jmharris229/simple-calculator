@@ -15,21 +15,39 @@ namespace simple_calculator
         public void setDictionary(string exp)
         {
             Console.WriteLine("got here");
-            //create an if statement that checks to see if an instance of the dictionary key value pair is in constatns if it is throw an exception, if not add it
-            foreach (var item in constants)
+            int constantValue = 0;
+            if(constants.Count == 0)
             {
-                if(exp[0] == item.Key)
+                if(exp.Length == 3)
                 {
-                    throw new Exception();
+                    constantValue = int.Parse(exp[2].ToString());
                 }
                 else
                 {
-                    Console.WriteLine("got to else");
-                    int constantValue = Convert.ToInt32(exp.Substring(2, exp.Length - 1));
-                    constants.Add(exp[0], constantValue);
-                    Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
+                    constantValue = int.Parse(exp.Substring(2, exp.Length - 2));
+                }
+                constants.Add(exp[0], constantValue);
+                Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
+            }
+            else
+            {
+                foreach (var item in constants)
+                {
+                    if (exp[0] == item.Key)
+                    {
+                        throw new Exception();
+                    }
+                    else
+                    {
+                        Console.WriteLine("got to else");
+                        constantValue = Convert.ToInt32(exp.Substring(2, exp.Length - 1));
+                        constants.Add(exp[0], constantValue);
+                        Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
+                    }
                 }
             }
+            //create an if statement that checks to see if an instance of the dictionary key value pair is in constatns if it is throw an exception, if not add it
+
             //convert letter to lower case for check and save
         }
 
