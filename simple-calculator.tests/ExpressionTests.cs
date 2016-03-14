@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace simple_calculator.tests
 {
@@ -25,8 +26,9 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Expression math_add = new Expression();
-
-            ParsedExp exp = math_add.collectTerms("1+2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            ParsedExp exp = math_add.collectTerms("1+2", dict, constants);
             //tests to prove that the operator and terms were saved as numbers
 
             Assert.AreEqual(typeof(int),exp.term1.GetType());
@@ -36,8 +38,9 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Expression math_add = new Expression();
-
-            ParsedExp exp = math_add.collectTerms("1+2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            ParsedExp exp = math_add.collectTerms("1+2", dict, constants);
             //tests to prove that the operator and terms were saved as numbers
 
             Assert.AreEqual(typeof(int), exp.term2.GetType());
@@ -46,7 +49,9 @@ namespace simple_calculator.tests
         public void EnsureCapturingOperatorinExpression()
         {
             Expression math_add = new Expression();
-            ParsedExp exp = math_add.collectTerms("1+2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            ParsedExp exp = math_add.collectTerms("1+2", dict, constants);
             int opPresent = '+';
             //prove that the operator was saved and ensures that the correct operation was called
             Assert.AreEqual(opPresent, exp.oper);
@@ -55,7 +60,9 @@ namespace simple_calculator.tests
         public void EnsureEvaluatHandleCorrectExpression()
         {
             Evaluate mathey = new Evaluate();
-            double result = mathey.calculate("1+2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            double result = mathey.calculate("1+2", dict, constants);
             Assert.AreEqual(3, result);
         }
         [TestMethod]
@@ -63,14 +70,18 @@ namespace simple_calculator.tests
         public void EnsureEvaluateHandleBadTermsExpressionEndOp()
         {
             Evaluate mathey = new Evaluate();
-            mathey.calculate("1+");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            mathey.calculate("1+", dict, constants);
         }
         [TestMethod]
         [ExpectedException(typeof(NoOperatorException))]
         public void EnsureEvaluateHandleBadTermsExpressionBegOp()
         {
             Evaluate mathey = new Evaluate();
-            mathey.calculate("%1");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            mathey.calculate("%1", dict, constants);
             
         }
         [TestMethod]
@@ -78,20 +89,26 @@ namespace simple_calculator.tests
         public void EnsureEvaluateHandleBadTermsExpressionExtraOp()
         {
             Evaluate mathey = new Evaluate();
-            mathey.calculate("1+%2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            mathey.calculate("1+%2", dict, constants);
         }
         [TestMethod]
         [ExpectedException(typeof(NoOperatorException))]
         public void EnsureEvaluateHandleNoOperatorExpression()
         {
             Evaluate mathey = new Evaluate();
-            mathey.calculate("1");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            mathey.calculate("1", dict, constants);
         }
         [TestMethod]
         public void EnsureCollectTermsHandleNegativeInFirstTerm()
         {
             Evaluate mathey = new Evaluate();
-            double act_result = mathey.calculate("-1+2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            double act_result = mathey.calculate("-1+2", dict, constants);
             int exp_result = 1;
             Assert.AreEqual(exp_result, act_result);
         }
@@ -99,7 +116,9 @@ namespace simple_calculator.tests
         public void EnsureCollectTermsHandleNegativeSecondTerm()
         {
             Evaluate mathey = new Evaluate();
-            double act_result = mathey.calculate("1+-2");
+            Stack dict = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
+            double act_result = mathey.calculate("1+-2", dict, constants);
             int exp_result = -1;
             Assert.AreEqual(exp_result, act_result);
         }

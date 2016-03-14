@@ -18,7 +18,7 @@ namespace simple_calculator
         private Operators opers;
         private Stack Prevterms;
 
-        public double calculate(string exp)
+        public double calculate(string exp, Stack Dictionary, Dictionary<char, int> constants)
         {
             ParsedExp parsedExp;
 
@@ -29,12 +29,12 @@ namespace simple_calculator
             }
             else if (exp.Equals("lastq"))
             {
-                parsedExp = collection.collectTerms(Prevterms.lastq);
+                parsedExp = collection.collectTerms(Prevterms.lastq, Dictionary, constants);
             }
             else
             {
                 Prevterms.lastq = exp;
-                parsedExp = collection.collectTerms(exp);              
+                parsedExp = collection.collectTerms(exp, Dictionary, constants);              
             }
 
             //runs the operator function passed

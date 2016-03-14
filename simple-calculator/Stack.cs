@@ -10,11 +10,10 @@ namespace simple_calculator
     {
         public string lastq { get; set; }
         public int last { get; set; }
-        Dictionary<char, int> constants = new Dictionary<char, int>();
 
-        public void setDictionary(string exp)
+
+        public void setDictionary(string exp, Dictionary<char, int> constants)
         {
-            Console.WriteLine("got here");
             int constantValue = 0;
             if(constants.Count == 0)
             {
@@ -50,7 +49,7 @@ namespace simple_calculator
             //convert letter to lower case for check and save
         }
 
-        public int constantsDictionary(string exp)
+        public int constantsDictionary(string exp, Dictionary<char, int> constants)
         {
             //create an if statement that checks to see if the value is there, if it is return the value, else throw exception that constant not defined
             if (constants.ContainsKey(exp[0]))

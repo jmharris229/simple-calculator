@@ -15,7 +15,7 @@ namespace simple_calculator
             equation = equation.Replace(" ", "");
             return equation;
         }
-        public ParsedExp collectTerms(string exp)
+        public ParsedExp collectTerms(string exp, Stack Dictionary, Dictionary<char, int> constants)
         {
             Stack dictionary = new Stack();
             string input = exp;          
@@ -67,18 +67,17 @@ namespace simple_calculator
 
 
             bool match1 = Regex.IsMatch(terms[0], @"^[a-zA-Z]+$");
-            bool match2 = Regex.IsMatch(terms[1], @"^[a-zA-Z]+$");
-            Stack Dictionary = new Stack();
+            bool match2 = Regex.IsMatch(terms[1], @"^[a-zA-Z]+$");         
             string termValue1 = terms[0];
             string termValue2 = terms[1];
             if (match1)
             {
-                termValue1 = Dictionary.constantsDictionary(terms[0]).ToString();
+                termValue1 = Dictionary.constantsDictionary(terms[0], constants).ToString();
             }
 
             if (match2)
             {
-                termValue2 = Dictionary.constantsDictionary(terms[1]).ToString();
+                termValue2 = Dictionary.constantsDictionary(terms[1], constants).ToString();
             }
 
             ParsedExp expression = new ParsedExp();

@@ -13,6 +13,7 @@ namespace simple_calculator
         {
             Evaluate runExp = new Evaluate();
             Stack dictionary = new Stack();
+            Dictionary<char, int> constants = new Dictionary<char, int>();
             int exiter = 0;
             int counter = 1;
 
@@ -28,27 +29,16 @@ namespace simple_calculator
                 }
                 else if (expression.Contains('='))
                 {
-                    dictionary.setDictionary(expression);
+                    dictionary.setDictionary(expression, constants);
                     counter++;
                 }
                 else
                 {
-                    double result = runExp.calculate(expression);
+                    double result = runExp.calculate(expression, dictionary, constants);
                     counter++;
                     Console.WriteLine("= {0}", result);
                 }
             }
-            /* try
-             {
-                 double result = runExp.calculate("2+4");
-                 Console.WriteLine("= "+result);
-                 Console.WriteLine(runExp.calculate("lastq"));
-                 Console.ReadKey();
-             }
-             catch (Exception ex)
-             {
-                 Console.WriteLine("{0} Exception caught.", ex);
-             }*/
         }
     }
 }
