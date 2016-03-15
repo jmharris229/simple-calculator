@@ -64,6 +64,7 @@ namespace simple_calculator
             //will attempt to split the input into two strings based on new input which starts without the negative at the beginning if there was one. and should split on the first instance of the operator.
             string[] terms = input.Split(new char[] { op }, 2);
 
+         
 
 
             bool match1 = Regex.IsMatch(terms[0], @"^[a-zA-Z]+$");

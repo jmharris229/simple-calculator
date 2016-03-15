@@ -25,7 +25,7 @@ namespace simple_calculator
                 {
                     constantValue = int.Parse(exp.Substring(2, exp.Length - 2));
                 }
-                constants.Add(exp[0], constantValue);
+                constants.Add(Char.ToLower(exp[0]), constantValue);
                 Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
             }
             else
@@ -44,9 +44,6 @@ namespace simple_calculator
                     }
                 }
             }
-            //create an if statement that checks to see if an instance of the dictionary key value pair is in constatns if it is throw an exception, if not add it
-
-            //convert letter to lower case for check and save
         }
 
         public int constantsDictionary(string exp, Dictionary<char, int> constants)
