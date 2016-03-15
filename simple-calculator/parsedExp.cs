@@ -11,5 +11,7 @@ namespace simple_calculator
         public int term1 { get; set; }
         public int term2 { get; set; }
         public char oper { get; set; }
+        public char constant { get; set; }
+        public int constantValue { get; set; }
     }
 }

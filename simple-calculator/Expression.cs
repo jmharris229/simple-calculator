@@ -21,7 +21,7 @@ namespace simple_calculator
             string input = exp;          
             input = input.Replace(" ", "");
 
-            char[] opArray = new char[] { '+', '-', '/', '*', '%' };
+            char[] opArray = new char[] { '+', '-', '/', '*', '%', '=' };
             char ForP = '+';
 
             //check to to see if the 0 index is a negative. if so makes substring of input without it.
@@ -42,7 +42,7 @@ namespace simple_calculator
                 throw new NoOperatorException("Need an operator!");
             }
 
-            char[] NoMinusOpArray = new char[] { '+', '/', '*', '%' };
+            char[] NoMinusOpArray = new char[] { '+', '/', '*', '%', '=' };
             foreach (var item in NoMinusOpArray)
             {
                 try
@@ -64,13 +64,12 @@ namespace simple_calculator
             //will attempt to split the input into two strings based on new input which starts without the negative at the beginning if there was one. and should split on the first instance of the operator.
             string[] terms = input.Split(new char[] { op }, 2);
 
-         
-
+            string termValue1 = terms[0];
+            string termValue2 = terms[1];
 
             bool match1 = Regex.IsMatch(terms[0], @"^[a-zA-Z]+$");
             bool match2 = Regex.IsMatch(terms[1], @"^[a-zA-Z]+$");         
-            string termValue1 = terms[0];
-            string termValue2 = terms[1];
+
             if (match1)
             {
                 termValue1 = Dictionary.constantsDictionary(terms[0], constants).ToString();
@@ -87,6 +86,26 @@ namespace simple_calculator
                 expression.oper = op;
                 expression.term1 = int.Parse(ForP + termValue1);
                 expression.term2 = int.Parse(termValue2);
+            }
+            else if(op == '=')
+            {
+                int number;
+                expression.oper = op;
+
+                if(int.TryParse(termValue1, out number) == true && int.TryParse(termValue2, out number))
+                {
+                    throw new Exception();
+                }
+                else if(int.TryParse(termValue1, out number) == false)
+                {
+                    expression.constant = Convert.ToChar(termValue1);
+                    expression.constantValue = int.Parse(termValue2);
+                }
+                else
+                {
+                    expression.constant = Convert.ToChar(termValue2);
+                    expression.constantValue = int.Parse(termValue1);
+                }
             }
             else
             {

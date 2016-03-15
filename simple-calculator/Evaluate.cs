@@ -62,6 +62,22 @@ namespace simple_calculator
                 Prevterms.last = (int)result;
                 return result;
             }
+            else if(parsedExp.oper == '=')
+            {
+       
+                Prevterms.setDictionary(parsedExp.constant, parsedExp.constantValue);
+
+                return parsedExp.constantValue;
+
+                //if(int.TryParse(parsedExp.term1, out number))
+                //{
+                //    result = Prevterms.setDictionary(parsedExp.term1, parsedExp.term2);
+                //}
+                //else if(int.TryParse(parsedExp.term2,out number))
+                //{
+                //    result = Prevterms.setDictionary(parsedExp.term2, parsedExp.term1);
+                //}
+            }
             else
             {
                 int result = opers.modulo(parsedExp.term1, parsedExp.term2);
