@@ -21,25 +21,15 @@ namespace simple_calculator
 
         public void setDictionary( char constant, int constantValue)
         {
-            if(the_dictionary.Count == 0)
+
+            if (the_dictionary.ContainsKey(constant))
             {
-                the_dictionary.Add(Char.ToLower(constant), constantValue);
-                Console.WriteLine("= Saved {0} as {1}", constant, constantValue);
+                throw new Exception();
             }
             else
             {
-                foreach (var item in the_dictionary)
-                {
-                    if (constant == item.Key)
-                    {
-                        throw new Exception();
-                    }
-                    else
-                    {
-                        the_dictionary.Add(constant, constantValue);
-                        Console.WriteLine("= Saved {0} as {1}", constant, constantValue);
-                    }
-                }
+                the_dictionary.Add(char.ToLower(constant), constantValue);
+                Console.WriteLine("= Saved {0} as {1}", constant, constantValue);
             }
         }
 

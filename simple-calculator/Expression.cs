@@ -98,15 +98,11 @@ namespace simple_calculator
                 }
                 else if(int.TryParse(termValue1, out number) == false)
                 {
-                    Dictionary.the_dictionary.Add(Convert.ToChar(termValue1), int.Parse(termValue2));
-                    //expression.constant = Convert.ToChar(termValue1);
-                    //expression.constantValue = int.Parse(termValue2);
+                    Dictionary.setDictionary(Convert.ToChar(termValue1), int.Parse(termValue2));
                 }
                 else if(int.TryParse(termValue2, out number) == false)
                 {
-                    Dictionary.the_dictionary.Add(Convert.ToChar(termValue2), int.Parse(termValue1));
-                    //expression.constant = Convert.ToChar(termValue2);
-                    //expression.constantValue = int.Parse(termValue1);
+                    Dictionary.setDictionary(Convert.ToChar(termValue2), int.Parse(termValue1));
                 }
                 else
                 {

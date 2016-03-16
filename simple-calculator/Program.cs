@@ -31,7 +31,11 @@ namespace simple_calculator
                 {
                     double result = runExp.calculate(expression, dictionary);
                     counter++;
-                    Console.WriteLine("= {0}", result);
+
+                    if(expression.IndexOfAny( new char['=']) > -1)
+                    {
+                        Console.WriteLine("= {0}", result);
+                    }
                 }
             }
         }

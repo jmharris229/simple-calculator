@@ -75,6 +75,16 @@ namespace simple_calculator.tests
             Assert.IsTrue(dict.the_dictionary.ContainsKey('x'));
         }
         [TestMethod]
+        public void DictionaryTestProveCanAddMultipleConstants()
+        {
+            Evaluate mathey = new Evaluate();
+            Stack dict = new Stack();
+            mathey.calculate("x=1", dict);
+            mathey.calculate("y=2", dict);
+
+            Assert.IsTrue(dict.the_dictionary.Count == 2);
+        }
+        [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void DictionaryTestHandlesIfConstantNotSaved()
         {
