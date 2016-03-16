@@ -27,7 +27,6 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Expression math_add = new Expression();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             ParsedExp exp = math_add.collectTerms("1+2", dict);
             //tests to prove that the operator and terms were saved as numbers
 
@@ -39,7 +38,6 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Expression math_add = new Expression();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             ParsedExp exp = math_add.collectTerms("1+2", dict);
             //tests to prove that the operator and terms were saved as numbers
 
@@ -50,7 +48,6 @@ namespace simple_calculator.tests
         {
             Expression math_add = new Expression();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             ParsedExp exp = math_add.collectTerms("1+2", dict);
             int opPresent = '+';
             //prove that the operator was saved and ensures that the correct operation was called
@@ -61,7 +58,6 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             double result = mathey.calculate("1+2", dict);
             Assert.AreEqual(3, result);
         }
@@ -71,7 +67,6 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             mathey.calculate("1+", dict);
         }
         [TestMethod]
@@ -80,7 +75,6 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             mathey.calculate("%1", dict);
             
         }
@@ -90,7 +84,6 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             mathey.calculate("1+%2", dict);
         }
         [TestMethod]
@@ -99,7 +92,6 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             mathey.calculate("1", dict);
         }
         [TestMethod]
@@ -107,7 +99,6 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             double act_result = mathey.calculate("-1+2", dict);
             int exp_result = 1;
             Assert.AreEqual(exp_result, act_result);
@@ -117,10 +108,18 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
             double act_result = mathey.calculate("1+-2", dict);
             int exp_result = -1;
             Assert.AreEqual(exp_result, act_result);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidConstantDeclarationException))]
+        public void EnsureCollectTermsHandlesInvalid2ConstantDec()
+        {
+            Evaluate mathey = new Evaluate();
+            Stack dict = new Stack();
+            mathey.calculate("x=y",dict);
+            
         }
     }
 }

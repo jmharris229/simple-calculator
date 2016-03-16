@@ -92,9 +92,9 @@ namespace simple_calculator
                 int number;
                 expression.oper = op;
 
-                if(int.TryParse(termValue1, out number) == true && int.TryParse(termValue2, out number) ==true)
+                if(int.TryParse(termValue1, out number) == false && int.TryParse(termValue2, out number) == false)
                 {
-                    throw new Exception();
+                    throw new InvalidConstantDeclarationException("Incorrect Constant Declaration");
                 }
                 else if(int.TryParse(termValue1, out number) == false)
                 {
@@ -106,7 +106,7 @@ namespace simple_calculator
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new InvalidConstantDeclarationException("Incorrect Constant Declaration");
                 }
             }
             else

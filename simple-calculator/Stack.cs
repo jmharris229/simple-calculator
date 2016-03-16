@@ -24,7 +24,7 @@ namespace simple_calculator
 
             if (the_dictionary.ContainsKey(constant))
             {
-                throw new Exception();
+                throw new AlreadyDefinedConstantException("Oops! That constant is already defined!");
             }
             else
             {
@@ -42,7 +42,7 @@ namespace simple_calculator
             }
             else
             {
-                throw new Exception();
+                throw new NoConstantException("That Constant is not defined!");
             }       
         }
     }

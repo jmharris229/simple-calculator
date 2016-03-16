@@ -25,7 +25,7 @@ namespace simple_calculator.tests
             Assert.AreEqual(expectThere, actualThere);
         }
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(AlreadyDefinedConstantException))]
         public void DictionaryTestHandlesConstantsDefinedOnce()
         {
             Evaluate mathey = new Evaluate();
@@ -85,7 +85,7 @@ namespace simple_calculator.tests
             Assert.IsTrue(dict.the_dictionary.Count == 2);
         }
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(NoConstantException))]
         public void DictionaryTestHandlesIfConstantNotSaved()
         {
             Evaluate mathey = new Evaluate();
