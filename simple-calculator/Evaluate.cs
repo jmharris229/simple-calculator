@@ -33,7 +33,7 @@ namespace simple_calculator
             }
             else
             {
-                Prevterms.lastq = exp;
+                Dictionary.lastq = exp;
                 parsedExp = collection.collectTerms(exp, Dictionary);              
             }
 

@@ -32,6 +32,10 @@ namespace simple_calculator
                         int constantValue = dictionary.constantsDictionary(expression);
                         Console.WriteLine("= {0}", constantValue);
                     }
+                    else if(expression == "lastq")
+                    {
+                        Console.WriteLine(" = {0}",dictionary.lastq);
+                    }
                     else
                     {
                         double result = runExp.calculate(expression, dictionary);
