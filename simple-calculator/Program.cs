@@ -13,7 +13,7 @@ namespace simple_calculator
         {
             Evaluate runExp = new Evaluate();
             Stack dictionary = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
+            //Dictionary<char, int> constants = new Dictionary<char, int>();
             int exiter = 0;
             int counter = 1;
 
@@ -27,14 +27,9 @@ namespace simple_calculator
                     exiter = 1;
                     Console.WriteLine("Bye!");
                 }
-                else if (expression.Contains('='))
-                {
-                    dictionary.setDictionary(expression, constants);
-                    counter++;
-                }
                 else
                 {
-                    double result = runExp.calculate(expression, dictionary, constants);
+                    double result = runExp.calculate(expression, dictionary);
                     counter++;
                     Console.WriteLine("= {0}", result);
                 }

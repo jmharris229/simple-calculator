@@ -13,16 +13,15 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> expected = new Dictionary<char, int>();
-            Dictionary<char, int> actual = new Dictionary<char, int>();
 
             //expected parts
             expected.Add('x', 1);
 
             //actual test
-            dict.setDictionary("X=1", actual);
+            dict.setDictionary('X', 1);
 
             bool expectThere = expected.ContainsKey('x');
-            bool actualThere = actual.ContainsKey('x');
+            bool actualThere = dict.the_dictionary.ContainsKey('x');
             Assert.AreEqual(expectThere, actualThere);
         }
         [TestMethod]
@@ -31,22 +30,49 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
 
-            dict.setDictionary("x=1", constants);
-            dict.setDictionary("x=2", constants);
+            dict.setDictionary('x', 1);
+            dict.setDictionary('x', 2);
         }
         [TestMethod]
         public void DictionaryTestProvesUseConstantsInExpression()
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
-            dict.setDictionary("x=1", constants);
-            double actual = mathey.calculate("x+2", dict, constants);
+            dict.setDictionary('x', 1);
+            double actual = mathey.calculate("x+2", dict);
 
             double expected = 3;
             Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void DictionaryTestProveUseConstantInSecondTerm()
+        {
+            Evaluate mathey = new Evaluate();
+            Stack dict = new Stack();
+            dict.setDictionary('x', 1);
+            double actual = mathey.calculate("2+x", dict);
+
+            double expected = 3;
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void DictionaryTestProveSetConstantThroughCalculate()
+        {
+            Evaluate mathey = new Evaluate();
+            Stack dict = new Stack();
+            double actual = mathey.calculate("x=1", dict);
+
+            Assert.IsTrue(dict.the_dictionary.ContainsKey('x'));
+        }
+        [TestMethod]
+        public void DictionaryTestProveSetConstantThroughCalculateSecondTerm()
+        {
+            Evaluate mathey = new Evaluate();
+            Stack dict = new Stack();
+            double actual = mathey.calculate("1=x", dict);
+
+            Assert.IsTrue(dict.the_dictionary.ContainsKey('x'));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -54,10 +80,10 @@ namespace simple_calculator.tests
         {
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
-            Dictionary<char, int> constants = new Dictionary<char, int>();
-            constants.Add('x', 1);
+            
+            dict.the_dictionary.Add('x', 1);
 
-            dict.constantsDictionary("y", constants);
+            dict.constantsDictionary("y");
         }
        
     }

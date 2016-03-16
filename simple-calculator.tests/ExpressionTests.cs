@@ -28,7 +28,7 @@ namespace simple_calculator.tests
             Expression math_add = new Expression();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            ParsedExp exp = math_add.collectTerms("1+2", dict, constants);
+            ParsedExp exp = math_add.collectTerms("1+2", dict);
             //tests to prove that the operator and terms were saved as numbers
 
             Assert.AreEqual(typeof(int),exp.term1.GetType());
@@ -40,7 +40,7 @@ namespace simple_calculator.tests
             Expression math_add = new Expression();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            ParsedExp exp = math_add.collectTerms("1+2", dict, constants);
+            ParsedExp exp = math_add.collectTerms("1+2", dict);
             //tests to prove that the operator and terms were saved as numbers
 
             Assert.AreEqual(typeof(int), exp.term2.GetType());
@@ -51,7 +51,7 @@ namespace simple_calculator.tests
             Expression math_add = new Expression();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            ParsedExp exp = math_add.collectTerms("1+2", dict, constants);
+            ParsedExp exp = math_add.collectTerms("1+2", dict);
             int opPresent = '+';
             //prove that the operator was saved and ensures that the correct operation was called
             Assert.AreEqual(opPresent, exp.oper);
@@ -62,7 +62,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            double result = mathey.calculate("1+2", dict, constants);
+            double result = mathey.calculate("1+2", dict);
             Assert.AreEqual(3, result);
         }
         [TestMethod]
@@ -72,7 +72,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            mathey.calculate("1+", dict, constants);
+            mathey.calculate("1+", dict);
         }
         [TestMethod]
         [ExpectedException(typeof(NoOperatorException))]
@@ -81,7 +81,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            mathey.calculate("%1", dict, constants);
+            mathey.calculate("%1", dict);
             
         }
         [TestMethod]
@@ -91,7 +91,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            mathey.calculate("1+%2", dict, constants);
+            mathey.calculate("1+%2", dict);
         }
         [TestMethod]
         [ExpectedException(typeof(NoOperatorException))]
@@ -100,7 +100,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            mathey.calculate("1", dict, constants);
+            mathey.calculate("1", dict);
         }
         [TestMethod]
         public void EnsureCollectTermsHandleNegativeInFirstTerm()
@@ -108,7 +108,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            double act_result = mathey.calculate("-1+2", dict, constants);
+            double act_result = mathey.calculate("-1+2", dict);
             int exp_result = 1;
             Assert.AreEqual(exp_result, act_result);
         }
@@ -118,7 +118,7 @@ namespace simple_calculator.tests
             Evaluate mathey = new Evaluate();
             Stack dict = new Stack();
             Dictionary<char, int> constants = new Dictionary<char, int>();
-            double act_result = mathey.calculate("1+-2", dict, constants);
+            double act_result = mathey.calculate("1+-2", dict);
             int exp_result = -1;
             Assert.AreEqual(exp_result, act_result);
         }

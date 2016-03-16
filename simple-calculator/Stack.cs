@@ -11,47 +11,44 @@ namespace simple_calculator
         public string lastq { get; set; }
         public int last { get; set; }
 
-
-        public void setDictionary(string exp, Dictionary<char, int> constants)
+        public Stack()
         {
-            int constantValue = 0;
-            if(constants.Count == 0)
+            the_dictionary = new Dictionary<char, int>();
+        }
+
+        public Dictionary<char, int> the_dictionary { get; set; }
+        //Dictionary<char, int> constants = new Dictionary<char, int>();
+
+        public void setDictionary( char constant, int constantValue)
+        {
+            if(the_dictionary.Count == 0)
             {
-                if(exp.Length == 3)
-                {
-                    constantValue = int.Parse(exp[2].ToString());
-                }
-                else
-                {
-                    constantValue = int.Parse(exp.Substring(2, exp.Length - 2));
-                }
-                constants.Add(Char.ToLower(exp[0]), constantValue);
-                Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
+                the_dictionary.Add(Char.ToLower(constant), constantValue);
+                Console.WriteLine("= Saved {0} as {1}", constant, constantValue);
             }
             else
             {
-                foreach (var item in constants)
+                foreach (var item in the_dictionary)
                 {
-                    if (exp[0] == item.Key)
+                    if (constant == item.Key)
                     {
                         throw new Exception();
                     }
                     else
                     {
-                        constantValue = Convert.ToInt32(exp.Substring(2, exp.Length - 1));
-                        constants.Add(exp[0], constantValue);
-                        Console.WriteLine("= Saved {0} as {1}", exp[0], constantValue);
+                        the_dictionary.Add(constant, constantValue);
+                        Console.WriteLine("= Saved {0} as {1}", constant, constantValue);
                     }
                 }
             }
         }
 
-        public int constantsDictionary(string exp, Dictionary<char, int> constants)
+        public int constantsDictionary(string exp)
         {
             //create an if statement that checks to see if the value is there, if it is return the value, else throw exception that constant not defined
-            if (constants.ContainsKey(exp[0]))
+            if (the_dictionary.ContainsKey(exp[0]))
             {
-                return constants[exp[0]];
+                return the_dictionary[exp[0]];
             }
             else
             {

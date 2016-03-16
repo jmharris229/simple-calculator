@@ -15,7 +15,7 @@ namespace simple_calculator
             equation = equation.Replace(" ", "");
             return equation;
         }
-        public ParsedExp collectTerms(string exp, Stack Dictionary, Dictionary<char, int> constants)
+        public ParsedExp collectTerms(string exp, Stack Dictionary)
         {
             Stack dictionary = new Stack();
             string input = exp;          
@@ -51,7 +51,7 @@ namespace simple_calculator
                     {
                         throw new InvalidTermException("Invalid Term Placement.");
                     }
-                }catch(IndexOutOfRangeException ex)
+                }catch(IndexOutOfRangeException)
                 {
                     throw new InvalidTermException("Invalid Term Placement.");
                 }
@@ -70,14 +70,14 @@ namespace simple_calculator
             bool match1 = Regex.IsMatch(terms[0], @"^[a-zA-Z]+$");
             bool match2 = Regex.IsMatch(terms[1], @"^[a-zA-Z]+$");         
 
-            if (match1)
+            if (match1 == true && op != '=')
             {
-                termValue1 = Dictionary.constantsDictionary(terms[0], constants).ToString();
+                termValue1 = Dictionary.constantsDictionary(terms[0]).ToString();
             }
 
-            if (match2)
+            if (match2 == true && op != '=')
             {
-                termValue2 = Dictionary.constantsDictionary(terms[1], constants).ToString();
+                termValue2 = Dictionary.constantsDictionary(terms[1]).ToString();
             }
 
             ParsedExp expression = new ParsedExp();
@@ -92,19 +92,25 @@ namespace simple_calculator
                 int number;
                 expression.oper = op;
 
-                if(int.TryParse(termValue1, out number) == true && int.TryParse(termValue2, out number))
+                if(int.TryParse(termValue1, out number) == true && int.TryParse(termValue2, out number) ==true)
                 {
                     throw new Exception();
                 }
                 else if(int.TryParse(termValue1, out number) == false)
                 {
-                    expression.constant = Convert.ToChar(termValue1);
-                    expression.constantValue = int.Parse(termValue2);
+                    Dictionary.the_dictionary.Add(Convert.ToChar(termValue1), int.Parse(termValue2));
+                    //expression.constant = Convert.ToChar(termValue1);
+                    //expression.constantValue = int.Parse(termValue2);
+                }
+                else if(int.TryParse(termValue2, out number) == false)
+                {
+                    Dictionary.the_dictionary.Add(Convert.ToChar(termValue2), int.Parse(termValue1));
+                    //expression.constant = Convert.ToChar(termValue2);
+                    //expression.constantValue = int.Parse(termValue1);
                 }
                 else
                 {
-                    expression.constant = Convert.ToChar(termValue2);
-                    expression.constantValue = int.Parse(termValue1);
+                    throw new Exception();
                 }
             }
             else
