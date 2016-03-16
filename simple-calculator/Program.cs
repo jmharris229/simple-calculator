@@ -19,7 +19,7 @@ namespace simple_calculator
 
             while (exiter == 0)
             {
-                Console.WriteLine("[{0}]", counter);
+                Console.Write("[{0}]", counter);
                 string expression = Console.ReadLine();
 
                 if (expression == "exit" || expression == "quit")
@@ -27,12 +27,16 @@ namespace simple_calculator
                     exiter = 1;
                     Console.WriteLine("Bye!");
                 }
+                else if (expression.IndexOfAny(new char['=']) > -1)
+                {
+                    int constantValue = dictionary.constantsDictionary(expression);
+                    Console.WriteLine("= {0}",constantValue);
+                }
                 else
                 {
                     double result = runExp.calculate(expression, dictionary);
                     counter++;
-
-                    if(expression.IndexOfAny( new char['=']) > -1)
+                    if(!expression.Contains("="))
                     {
                         Console.WriteLine("= {0}", result);
                     }
